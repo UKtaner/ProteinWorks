@@ -59,14 +59,12 @@ public class AccountCreation_stepDef {
     }
     @Given("Click COUNT ME IN button.")
     public void click_count_me_in_button() {
-
         accountCreationPage.notSubscribed.click();
 
     }
     @Given("Click JOIN UP button.")
     public void click_join_up_button()  {
         accountCreationPage.joinUpButton.click();
-
 
     }
     @Then("Verify that {string} page is visible")
