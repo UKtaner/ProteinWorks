@@ -13,7 +13,7 @@ public class Q3_CountLinks {
  The logic is to return a list of web elements with tagname anchor, then getting the size of that list.
   */
     public static void main(String[] args) {
-        Driver.getDriver().get("https://theproteinworks.com/");
+        Driver.getDriver().get("https://eager-musk.theproteinworks.com/products/protein-shakes");
         String url="";
         List<WebElement> allURLs = Driver.getDriver().findElements(By.tagName("a"));
         System.out.println("Total links on the Wb Page: " + allURLs.size());

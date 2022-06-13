@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import javax.security.auth.x500.X500Principal;
 import javax.xml.xpath.XPath;
 import java.util.List;
 
@@ -41,14 +42,22 @@ public class AccountCreationPage {
     public WebElement mobileNumber;
     @FindBy(name = "customer_goal")
     public WebElement customer_goal;
-    @FindBy(xpath = "//*[@id='is_subscribed_yes']")
+    @FindBy(xpath = "//*[contains(text(),'COUNT ME IN')]")
     public WebElement isSubscribed;
     @FindBy(xpath = "//*[@id='is_subscribed_no']")
     public WebElement notSubscribed;
-    @FindBy(xpath = "//div[@class='primary']")
+    //*[@title='Join up']
+    @FindBy(xpath = "//*[@class='actions-toolbar']")
     public WebElement joinUpButton;
     @FindBy(xpath = "(//*[text()='Personal Info'])[1]")
     public WebElement personalInfo;
+    @FindBy(xpath = "//a[normalize-space(text())='Continue Without The Offer']")
+    public WebElement offerPopUp;
+    @FindBy(xpath = "//*[@title='Accept']")
+    public WebElement acceptCookie;
+
+    @FindBy(xpath= "//*[@id='referrer']")
+    public WebElement referralCode;
 
 
 

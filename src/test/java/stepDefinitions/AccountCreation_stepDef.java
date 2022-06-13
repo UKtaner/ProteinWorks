@@ -9,37 +9,41 @@ import io.restassured.http.Cookies;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.AccountCreationPage;
 public class AccountCreation_stepDef {
        AccountCreationPage accountCreationPage=new AccountCreationPage();
-
-
-    @Given("Launch browser")
-    public void launch_browser()
-    {
-        Driver.getDriver().manage().deleteAllCookies();
-        Log.startTestCase("TESTCASE01 -");
-        Driver.getDriver().get(ConfigReader.getProperty("proteinWorks_url"));
-    }
+    WebDriverWait wait = new WebDriverWait(Driver.getDriver(),30);
     @And("Navigate to create an account page {string}")
     public void navigateToCreateAnAccountPage(String createCountPage) {
+        Log.startTestCase("TESTCASE01 -");
+        Driver.getDriver().manage().deleteAllCookies();
         Driver.getDriver().get(createCountPage);
          }
     @And("Verify that Create An Account page is visible.")
     public void verifyThatCreateAnAccountPageIsVisible() {
         Assert.assertTrue("Create An Account page is not visible",accountCreationPage.createAccountPageTitle.isDisplayed());
-
     }
-
     @Given("Fill details: as {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} respectively.")
-    public void fill_details_as_respectively(String firstName, String lastName, String email, String password, String confirmPassword, String gender, String dateOfBirth, String mobileNumber, String yourMainGoal) {
+    public void fill_details_as_respectively(String firstName, String lastName, String email, String password, String confirmPassword, String gender, String dateOfBirth, String mobileNumber, String yourMainGoal) throws InterruptedException {
        Driver.waitAndSendText(accountCreationPage.firstname,firstName,5);
         Driver.waitAndSendText(accountCreationPage.lastname,lastName,5);
         Driver.waitAndSendText(accountCreationPage.email,email,5);
         Driver.waitAndSendText(accountCreationPage.password,password,5);
         Driver.waitAndSendText(accountCreationPage.password_confirmation,confirmPassword,5);
 
+        try {
+            ReusableMethods.waitFor(5);
+            JSUtils.clickElementByJS(accountCreationPage.acceptCookie);
+            ReusableMethods.waitFor(5);
+            JSUtils.clickElementByJS(accountCreationPage.offerPopUp);
+
+        }
+    catch(Exception e){
+        System.out.println("POPUP CLEARED");
+}
         Select select1=new Select(accountCreationPage.genderDropdown);
         select1.selectByVisibleText(gender);
 
@@ -51,25 +55,35 @@ public class AccountCreation_stepDef {
         Driver.waitAndClick(accountCreationPage.selectDay,5);
 
         Driver.waitAndSendText(accountCreationPage.mobileNumber,mobileNumber,2);
-        Driver.waitAndSendText(accountCreationPage.customer_goal,yourMainGoal,2);
+        Driver.selectAnItemFromDropdown(accountCreationPage.customer_goal,"Toning");
+        Driver.waitAndSendText(accountCreationPage.referralCode,"Optional",5);
+
 
     }
     @Given("Click COUNT ME IN button.")
     public void click_count_me_in_button() {
-        Driver.waitAndClick( accountCreationPage.notSubscribed,2);
+        wait.until(ExpectedConditions.visibilityOf(accountCreationPage.isSubscribed));
+        JSUtils.clickElementByJS(accountCreationPage.isSubscribed);
+        //Driver.waitAndClick( accountCreationPage.notSubscribed,2);
+
     }
     @Given("Click JOIN UP button.")
-    public void click_join_up_button()  {
-        Driver.waitAndClick( accountCreationPage.joinUpButton,2);
+    public void click_join_up_button() throws InterruptedException {
+        wait.until(ExpectedConditions.visibilityOf(accountCreationPage.joinUpButton));
+        accountCreationPage.joinUpButton.click();
+        ReusableMethods.waitFor(50);
+
+
     }
     @Then("Verify that Personal Info is visible")
     public void verifyThatPersonalInfoIsVisible() {
-        accountCreationPage.personalInfo.isDisplayed();
+        wait.until(ExpectedConditions.visibilityOf(accountCreationPage.personalInfo));
+        accountCreationPage.personalInfo.click();
     }
     @Then("Close the application")
     public void closeTheApplication() {
         Log.endTestCase("TESTCASE01 -");
-        Driver.closeDriver();
+       Driver.closeDriver();
     }
 
 
