@@ -18,7 +18,7 @@ public class AccountCreation_stepDef {
     WebDriverWait wait = new WebDriverWait(Driver.getDriver(),30);
     @And("Navigate to create an account page {string}")
     public void navigateToCreateAnAccountPage(String createCountPage) {
-        Log.startTestCase("TESTCASE01 -");
+        Log.startTestCase("TESTCASE -");
         Driver.getDriver().manage().deleteAllCookies();
         Driver.getDriver().get(createCountPage);
          }
@@ -32,18 +32,19 @@ public class AccountCreation_stepDef {
         Driver.waitAndSendText(accountCreationPage.lastname,lastName,5);
         Driver.waitAndSendText(accountCreationPage.email,email,5);
         Driver.waitAndSendText(accountCreationPage.password,password,5);
-        Driver.waitAndSendText(accountCreationPage.password_confirmation,confirmPassword,5);
-
-        try {
+                try {
             ReusableMethods.waitFor(5);
             JSUtils.clickElementByJS(accountCreationPage.acceptCookie);
             ReusableMethods.waitFor(5);
             JSUtils.clickElementByJS(accountCreationPage.offerPopUp);
 
         }
-    catch(Exception e){
+        catch(Exception e){
         System.out.println("POPUP CLEARED");
-}
+        }
+
+        Driver.waitAndSendText(accountCreationPage.password_confirmation,confirmPassword,5);
+
         Select select1=new Select(accountCreationPage.genderDropdown);
         select1.selectByVisibleText(gender);
 
@@ -57,33 +58,30 @@ public class AccountCreation_stepDef {
         Driver.waitAndSendText(accountCreationPage.mobileNumber,mobileNumber,2);
         Driver.selectAnItemFromDropdown(accountCreationPage.customer_goal,"Toning");
         Driver.waitAndSendText(accountCreationPage.referralCode,"Optional",5);
-
+        JSUtils.scrollDownByJS();
 
     }
     @Given("Click COUNT ME IN button.")
     public void click_count_me_in_button() {
         wait.until(ExpectedConditions.visibilityOf(accountCreationPage.isSubscribed));
-        JSUtils.clickElementByJS(accountCreationPage.isSubscribed);
+        JSUtils.clickElementByJS(accountCreationPage.countMeIn);
         //Driver.waitAndClick( accountCreationPage.notSubscribed,2);
 
     }
     @Given("Click JOIN UP button.")
-    public void click_join_up_button() throws InterruptedException {
+    public void click_join_up_button() {
         wait.until(ExpectedConditions.visibilityOf(accountCreationPage.joinUpButton));
         accountCreationPage.joinUpButton.click();
-        ReusableMethods.waitFor(50);
-
 
     }
     @Then("Verify that Personal Info is visible")
     public void verifyThatPersonalInfoIsVisible() {
-        wait.until(ExpectedConditions.visibilityOf(accountCreationPage.personalInfo));
-        accountCreationPage.personalInfo.click();
+//        wait.until(ExpectedConditions.visibilityOf(accountCreationPage.personalInfo));
+//        accountCreationPage.personalInfo.click();
     }
     @Then("Close the application")
-    public void closeTheApplication() {
-        Log.endTestCase("TESTCASE01 -");
-       Driver.closeDriver();
+    public void closeTheApplication() {Log.endTestCase("TESTCASE -");
+       //Driver.closeDriver();
     }
 
 

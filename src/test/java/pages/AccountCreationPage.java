@@ -42,8 +42,7 @@ public class AccountCreationPage {
     public WebElement mobileNumber;
     @FindBy(name = "customer_goal")
     public WebElement customer_goal;
-    @FindBy(xpath = "//*[contains(text(),'COUNT ME IN')]")
-    public WebElement isSubscribed;
+
     @FindBy(xpath = "//*[@id='is_subscribed_no']")
     public WebElement notSubscribed;
     //*[@title='Join up']
@@ -60,6 +59,10 @@ public class AccountCreationPage {
     public WebElement referralCode;
 
 
+    @FindBy(xpath = "//*[text()='COUNT ME IN']")
+    public WebElement countMeIn;
+    @FindBy(xpath = "//*[contains(text(),'COUNT ME IN')]")
+    public WebElement isSubscribed;
 
 
 
