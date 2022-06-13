@@ -36,6 +36,7 @@ public class Q3_CountLinks {
                 System.out.println(linkUrl + " - " + httpURLConnect.getResponseMessage() + "is a broken link");
             }
             //Fetching and Printing the response code obtained
+
             else {
                 System.out.println(linkUrl + " - " + httpURLConnect.getResponseMessage());
             }
