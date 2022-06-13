@@ -576,3 +576,5 @@
 2022-06-13 03:14:59 INFO  Log:10 - ---------------------------------------------------------------------------------------
 2022-06-13 03:14:59 INFO  Log:11 - ***********************        TESTCASE01 - START    **************************
 2022-06-13 03:14:59 INFO  Log:12 - ---------------------------------------------------------------------------------------
+2022-06-13 03:33:08 INFO  WebDriverManager:966 - Using chromedriver 102.0.5005.61 (resolved driver for Chrome 102)
+2022-06-13 03:33:08 INFO  WebDriverManager:1021 - Exporting webdriver.chrome.driver as C:\Users\TARIK\.cache\selenium\chromedriver\win32\102.0.5005.61\chromedriver.exe

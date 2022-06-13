@@ -47,6 +47,8 @@ public class AccountCreationPage {
     public WebElement notSubscribed;
     @FindBy(xpath = "//div[@class='primary']")
     public WebElement joinUpButton;
+    @FindBy(xpath = "(//*[text()='Personal Info'])[1]")
+    public WebElement personalInfo;
 
 
 

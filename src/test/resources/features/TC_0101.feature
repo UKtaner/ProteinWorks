@@ -2,13 +2,12 @@
 Feature:Account creation
   Scenario Outline:User should create a new account.
     Given Launch browser
-    And Navigate to webpage.
     And Navigate to create an account page "https://www.theproteinworks.com/customer/account/create/"
-    And Verify that "Create An Account" page is visible
+    And Verify that Create An Account page is visible.
     And Fill details: as "<FirstName>", "<LastName>", "<Email>", "<Password>", "<ConfirmPassword>", "<Gender>", "<DateOfBirth>", "<MobileNumber>", "<YourMainGoal>" respectively.
     And Click JOIN UP button.
     And Click COUNT ME IN button.
-    Then Verify that "Personal Info" page is visible
+    Then Verify that Personal Info is visible
     Then Close the application
 
     Examples:Test Data
